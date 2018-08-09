@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.8.2.min.js"></script>
+</head>
+<body>
+<input onclick="ssss()" type="button" id="" value="点我" />
+</body>
+
+<script>
+    function ssss(){
+        /*jsonp形式的调用*/
+        /*$.ajax({
+            url:'http://localhost:8080/test',
+            dataType:"jsonp",
+            jsonp:"callback",
+            jsonpCallback:"success_jsonp",
+            timeout:3000,
+            success:function(json,textStatus){
+                alert(json[0].date)
+            },
+            error:function(XMLHttpRequest,textStatus,errorThrown){
+                console.log("jsonp.error:"+textStatus);
+            }
+        });*/
+        $.post("http://localhost:8080/test33", {},
+            function(data){
+                alert(data[0].name);
+            }, "json");
+    }
+
+</script>
+
+</html>
