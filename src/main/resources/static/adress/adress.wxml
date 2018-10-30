@@ -1,0 +1,40 @@
+<scroll-view id="right" scroll-y="true" scroll-top="{{scrollTop}}">
+  <view class='adress-list'>
+   
+      <view wx:for="{{adressArray}}" class="adress" wx:key="{{index}}"  id="{{index}}" > 
+        <view class='indexView'>
+          <view class='index'>
+            {{index+1}}
+          </view>
+        </view>
+        <view class='content'>
+          <view class='detailAdress'>
+            <text class='small'>详细地址：</text>
+            <text class='small'>{{item.detailedAddress}}</text>
+          </view>
+          <view class='detailAdress'>
+            <text class='small'>接收人：</text>
+            <text class='small'>{{item.recievePerson}}</text>
+          </view> 
+          <view class='lastLine'>
+            <view class='detailAdress'>
+              <text class='small'>手机号：</text>
+              <text class='small'>{{item.phoneNum}}</text>
+            </view>
+            <view class='editButton'>
+             <button class='button' id='{{item.addressId}}' bindtap='edit' >编辑</button>
+            </view>
+          </view> 
+         
+        </view>
+         
+      </view>
+     </view> 
+  <view class='blank'>
+  </view>
+</scroll-view>
+<view class='addBtn'>
+  <button class='addButton'  bindtap='addAddress'>
+    添加收货地址
+  </button>
+</view>

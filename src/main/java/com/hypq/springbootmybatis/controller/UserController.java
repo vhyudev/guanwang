@@ -50,7 +50,7 @@ public class UserController {
     @RequestMapping(value = "/test4")
     public String a(String callback, HttpServletResponse response) {
 
-        return "/hello.html";
+        return "/index.html";
 
     }
 
