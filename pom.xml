@@ -135,6 +135,7 @@
             <artifactId>spring-test</artifactId>
             <version>RELEASE</version>
         </dependency>
+
     </dependencies>
 
     <build>
