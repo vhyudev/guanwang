@@ -164,7 +164,7 @@ text-align:left;}
 	padding:20px 0px;}
 
 #body .MainBlock{
-	width:1080px;
+	width:100%;
 	margin:auto;
 	font-size:12px;
 	}
@@ -293,11 +293,11 @@ text-align:left;}
  }
 
 
-#body .blk_29 {	 PADDING:20px 0px; OVERFLOW: hidden;  ZOOM: 1; POSITION: relative;}
+#body .blk_29 {	 PADDING:20px 0px; OVERFLOW: hidden;  ZOOM: 1; POSITION: relative;width: 100%}
 	
 #body .blk_29 .LeftBotton {	  LEFT: 10px; FLOAT: left; WIDTH: 35px; CURSOR: pointer; POSITION: absolute; TOP: 80px; HEIGHT: 114px}
 #body .blk_29 .RightBotton {	RIGHT: 5px;  FLOAT: right;right:7px; WIDTH: 35px; CURSOR: pointer; POSITION: absolute; TOP: 80px; HEIGHT: 114px}
-#body .blk_29 .Cont {	MARGIN: 0px auto; OVERFLOW: hidden;  PADDING:5px 0 0 0px;float:left;height:130px;width:1080px;POSITION: relative;left:0px;}
+#body .blk_29 .Cont {	MARGIN: 0px auto; OVERFLOW: hidden;  PADDING:5px 0 0 0px;float:left;height:130px;width:100%;POSITION: relative;left:0px;}
 #body .blk_29 .box {	FLOAT: left; WIDTH: 270px;
 	height:120px; 
 	background:url("../../images/HituxCMSBold/item_bg.jpg") no-repeat center bottom;
