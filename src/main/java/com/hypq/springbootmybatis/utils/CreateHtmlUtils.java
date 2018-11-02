@@ -31,7 +31,7 @@ public class CreateHtmlUtils {
             String url = request.getSession().getServletContext().getRealPath("/");
             System.out.println(url);
             //设置输出文件
-            File file = new File(url+"\\WEB-INF\\classes\\static\\html \\result.html");
+            File file = new File(url+"\\WEB-INF\\classes\\static\\html\\result.html");
             System.out.println(file.toString());
             if(!file.exists()) {
                 file.createNewFile();
@@ -40,6 +40,8 @@ public class CreateHtmlUtils {
             out = new FileWriter(file);
             //模板输出静态文件
             template.process(data, out);
+            //输出到项目工程，防止tomcat重启丢失
+            template.process(data,new FileWriter(new File("D:\\guanwang\\guanwang\\src\\main\\resources\\static\\html\\result.html")));
         } catch (TemplateNotFoundException e) {
             e.printStackTrace();
         } catch (MalformedTemplateNameException e) {
