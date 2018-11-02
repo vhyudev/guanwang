@@ -28,10 +28,11 @@ public class CreateHtmlUtils {
             // 获取模板
             Template template = configuration.getTemplate("freemarker.ftl");
             CreateHtmlUtils s = new CreateHtmlUtils();
-            URL u=s.getClass().getClassLoader().getResource("html");
-            System.out.println(u.getPath());
+            String url = request.getSession().getServletContext().getRealPath("/");
+            System.out.println(url);
             //设置输出文件
-            File file = new File(u.getPath()+"\\result.html");
+            File file = new File(url+"\\WEB-INF\\classes\\static\\html \\result.html");
+            System.out.println(file.toString());
             if(!file.exists()) {
                 file.createNewFile();
             }
