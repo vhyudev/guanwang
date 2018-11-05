@@ -1,6 +1,7 @@
 
 /* top start*/
 body,td,th {
+
 	font-size: 14px;
 }
 
@@ -18,7 +19,7 @@ h3{
 li{
 	list-style-type:none;}
 
-img{border:0; 
+img{border:0;
 	}
 .gray{
 	color:#666666;}
@@ -168,7 +169,6 @@ input,textarea{
 	padding:0px 5px;
 	height:38px;
 	line-height:38px;
-	background:;
 	font-size:14px;
 	}
  #head #NavLink #sddm li P{
@@ -245,7 +245,7 @@ input,textarea{
 	bottom:0px;
 	left:0;
 	color:#0170d9;
-	font-weight:; 
+	font-weight:;
 	text-align:center;
 	cursor:pointer;
 	margin:auto;
