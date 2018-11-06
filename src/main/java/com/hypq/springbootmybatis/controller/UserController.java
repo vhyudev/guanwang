@@ -2,6 +2,8 @@ package com.hypq.springbootmybatis.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
+import com.hypq.springbootmybatis.dao.NewsTableMapper;
+import com.hypq.springbootmybatis.domain.NewsTable;
 import com.hypq.springbootmybatis.domain.User;
 import com.hypq.springbootmybatis.service.UserService;
 import com.hypq.springbootmybatis.utils.CreateHtmlUtils;
@@ -28,6 +30,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     RedisUtils ru;
+    @Resource
+    NewsTableMapper mapper;
 
     @RequestMapping(value = "/test",produces = MediaType.APPLICATION_JSON_VALUE)
     public void getUser(String callback, HttpServletResponse response) {
@@ -63,9 +67,11 @@ public class UserController {
 
 
     @RequestMapping("/test2")
-    public String test() {
-        Object cccc = ru.get("cccc");
-        return cccc.toString();
+    @ResponseBody
+    public NewsTable test() {
+        NewsTable nt=mapper.selectByPrimaryKey("1");
+
+        return nt;
     }
     @RequestMapping("/freemarker")
     public String freemarker(Map<String, Object> map, HttpServletRequest request){
