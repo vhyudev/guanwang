@@ -502,48 +502,8 @@
                             src='images/Up_Images/succuss_example.jpg' width='250' height='205' alt='成功案例'></a></div>
                     <div style="display: flex;position: relative;left: 40px">
 
-                        <table  width='100%' border='0' cellspacing='0' cellpadding='0'>
-                            <tr>
-                                <td width='80%'>· <a href='/html/5921035742.html' target='_blank'
-                                                     title='自闭症儿童训练计划（干货）'>自闭症儿童训练计划（干货）</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/604837367.html' target='_blank'
-                                                     title='自闭症儿童语言理解能力的训练'>自闭症儿童语言理解能力的训练</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/2307181335.html' target='_blank'
-                                                     title='没有口语的自闭症儿童的语言训练（二）'>没有口语的自闭症儿童的语言训练（二）</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/461372049.html' target='_blank'
-                                                     title='没有口语的自闭症儿童的语言训练（一）'>没有口语的自闭症儿童的语言训练（一）</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/7130842754.html' target='_blank'
-                                                     title='如何给自闭症儿童上小组融合课'>如何给自闭症儿童上小组融合课</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/7081341018.html' target='_blank'
-                                                     title='自闭症儿童语言训练的思路'>自闭症儿童语言训练的思路</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/0147525817.html' target='_blank'
-                                                     title='关于自闭症儿童行为自控技能的训练及其对问题行为的治疗'>关于自闭症儿童行为自控技能的训练</a>
-                                </td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/908675100.html' target='_blank'
-                                                     title='自闭症早期家庭训练指导方法（1）'>自闭症早期家庭训练指导方法（1）</a></td>
-                                <td width='20%'></td>
-                            </tr>
+                        <table id="chengGongAnLi"  width='100%' border='0' cellspacing='0' cellpadding='0'>
+
                         </table>
 
                     </div>
@@ -634,7 +594,21 @@
 
 </div>
 <script type="text/javascript" src="/js/ServiceCenter.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.post("/getsuccess",{"pnum":1,"psize":8},function(data){
+            for(var i=0;i<data.length;i++){
+                $("#chengGongAnLi").append("  <tr>\n" +
+                    "<td width='70%'>· <a href='"+data[i].url+"' target='_blank'\n" +
+                    "title='"+data[i].title+"' style='font-size: 6px;line-height:25px'>"+data[i].title+"</a></td>\n" +
+                    "<td width='30%'></td>\n" +
+                    "</tr>")
+            }
 
+
+        })
+    })
+</script>
 </body>
 </html>
 <!--
