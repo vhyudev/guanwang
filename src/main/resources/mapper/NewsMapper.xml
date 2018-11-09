@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hypq.springbootmybatis.dao.NewsDao" >
+    <resultMap id="BaseResultMap" type="com.hypq.springbootmybatis.domain.newsEntity" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="date" property="date" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="queryById" parameterType="String" resultType="BaseResultMap">
+        select * from news_table where id=#{id}
+    </select>
+</mapper>
