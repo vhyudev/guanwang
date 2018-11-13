@@ -6,11 +6,13 @@ import com.hypq.springbootmybatis.domain.SuccessTableExample;
 import com.hypq.springbootmybatis.service.SuccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@Transactional
 public class SuccessServiceImpl implements SuccessService {
     @Resource
     SuccessTableMapper mapper;

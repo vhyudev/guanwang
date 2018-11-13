@@ -5,11 +5,13 @@ import com.hypq.springbootmybatis.domain.NewsTable;
 import com.hypq.springbootmybatis.domain.NewsTableExample;
 import com.hypq.springbootmybatis.service.NewsService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@Transactional
 public class NewsServiceImpl implements NewsService {
     @Resource
     NewsTableMapper mapper;
