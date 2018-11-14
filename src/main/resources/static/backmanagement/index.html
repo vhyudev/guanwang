@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,15 +11,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
 
-    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
 </head>
 <body class="layui-layout-body">
+
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">&nbsp华瑶康复中心后台管理系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="/html/result.html">控制台</a></li>
             <li class="layui-nav-item"><a href="">商品管理</a></li>
             <li class="layui-nav-item"><a href="">用户</a></li>
             <li class="layui-nav-item">
@@ -37,7 +35,8 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
+                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
+                         class="layui-nav-img">
                     贤心
                 </a>
                 <dl class="layui-nav-child">
@@ -52,9 +51,9 @@
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">轮播图管理</a>
+                    <a class="" href="javascript:;" id="lunbotuguangli" onclick="tabadd(this)">轮播图管理</a>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">解决方案</a>
@@ -64,7 +63,7 @@
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="#">云市场</a></li>
+                <li class="layui-nav-item layui-nav-itemed"><a href="/html/result.html">云市场</a></li>
                 <li class="layui-nav-item"><a href="#">发布商品</a></li>
             </ul>
         </div>
@@ -73,23 +72,19 @@
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;">
-            内容主体区域
+            <div class="layui-tab" lay-filter="demo" lay-allowclose="true">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" lay-id="11">首页</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">欢迎来到,华瑶后台管理系统!</div>
+
+                </div>
+            </div>
 
             <br><br>
 
-            <blockquote class="layui-elem-quote">
-                注意：该页面只是简单的后台布局示例，并不是一整套后台系统方案，您可以关注 layui 官方提供后台模板解决方案：
-                <a href="https://www.layui.com/admin/" target="_blank" class="layui-btn layui-btn-danger">layuiAdmin</a>
-            </blockquote>
 
-            <blockquote class="layui-elem-quote">
-                layui 之所以赢得如此多人的青睐，更多是在于它“前后台系统通吃”的能力。既可编织出绚丽的前台页面，又可满足繁杂的后台功能需求。
-                <br>layui 后台布局， 致力于让每一位开发者都能轻松搭建自己的后台模板。
-            </blockquote>
-            <button type="button" class="layui-btn" id="upload" style="display: none">
-                <i class="layui-icon">&#xe67c;</i>上传图片
-            </button>
-            <table id="demo" lay-filter="test"></table>
             <br>
 
         </div>
@@ -100,112 +95,29 @@
         © layui.com - 底部固定区域
     </div>
 </div>
-<script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
+
 <script src="/layui/layui.all.js" charset="utf-8"></script>
 <script>
     //JavaScript代码区域
-
+    var ids=[0];
     var element = layui.element;
 
-        var table = layui.table;
+    function tabadd(ele) {
 
-        //第一个实例
-        table.render({
-            elem: '#demo'
-            ,height: 312
+           ids.push(ele.id)
+            element.tabAdd('demo', {
+                title: ele.innerHTML,
+                content: '<iframe data-frameid="1" frameborder="0" name="content" onload="setIframeHeight(this)" scrolling="no" width="100%" src="/html/LunbotuManger.html"></iframe>',
+                id: ele.id
+            })
+            element.tabChange('demo', ele.id); //切换到：用户管理
+            console.log(ids.contents(ele.id))
 
-            ,toolbar:'default'
-            ,url: '/getItems' //数据接口
+    }
 
-            ,cols: [[ //表头
-                {type:'checkbox', fixed: 'left'}
-                ,{field: 'id', title: '序号', width:100}
-                ,{field: 'picdesc', title: '图片简介', width:150}
-                ,{field: 'picname', title: '图片名称', width:100}
-                ,{field: 'url', title: '图片链接', width:100}
-                ,{field: 'src', title: '图片地址', width:100}
-                ,{field: 'bgcolor', title: '背景色', width:100}
-                ,{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}
-            ]]
-            ,page: true //开启分页
-        });
-    table.on('toolbar(test)', function(obj){
-        var checkStatus = table.checkStatus(obj.config.id);
-        switch(obj.event){
-            case 'add':
-                layer.msg('添加');
-                break;
-            case 'delete':
-                layer.msg('删除');
-                break;
-            case 'update':
-                layer.msg('编辑');
-                break;
-        };
-
-        table.on('checkbox(test)', function(obj){
-            console.log(obj)
-        });
-        //监听工具条
-        table.on('tool(test)', function(obj){
-            var data = obj.data;
-            if(obj.event === 'detail'){
-                layer.msg('ID：'+ data.id + ' 的查看操作');
-            } else if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del();
-                    layer.close(index);
-                });
-            } else if(obj.event === 'edit'){
-                layer.alert('编辑行：<br>'+ JSON.stringify(data))
-            }
-        });
-
-        var $ = layui.$, active = {
-            getCheckData: function(){ //获取选中数据
-                var checkStatus = table.checkStatus('demo')
-                    ,data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
-            }
-            ,getCheckLength: function(){ //获取选中数目
-                var checkStatus = table.checkStatus('demo')
-                    ,data = checkStatus.data;
-                layer.msg('选中了：'+ data.length + ' 个');
-            }
-            ,isAll: function(){ //验证是否全选
-                var checkStatus = table.checkStatus('demo');
-                layer.msg(checkStatus.isAll ? '全选': '未全选')
-            }
-        };
-
-        $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
-    });
-
-</script>
-<script>
-
-
-        var upload = layui.upload;
-
-        //执行实例
-        var uploadInst = upload.render({
-            elem: '#upload' //绑定元素
-            ,url: '/upload/' //上传接口
-            ,done: function(res){
-                //上传完毕回调
-            }
-            ,error: function(){
-                //请求异常回调
-            }
-        });
-
+    function setIframeHeight(iframe) {
+        iframe.height = document.documentElement.scrollHeight || document.body.scrollHeight;
+    };
 </script>
 </body>
 </html>

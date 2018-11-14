@@ -60,4 +60,16 @@ public class LunbotuTable {
     public void setBgcolor(String bgcolor) {
         this.bgcolor = bgcolor == null ? null : bgcolor.trim();
     }
+
+    @Override
+    public String toString() {
+        return "LunbotuTable{" +
+                "id='" + id + '\'' +
+                ", picdesc='" + picdesc + '\'' +
+                ", picname='" + picname + '\'' +
+                ", src='" + src + '\'' +
+                ", url='" + url + '\'' +
+                ", bgcolor='" + bgcolor + '\'' +
+                '}';
+    }
 }

@@ -8,4 +8,8 @@ public interface LunboService {
     List<LunbotuTable> getItems();
 
     int getCount();
+
+    void addLunbotu(LunbotuTable lunbotu);
+
+    void deleteLunbotu(String id);
 }
