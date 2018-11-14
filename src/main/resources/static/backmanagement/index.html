@@ -63,7 +63,7 @@
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed"><a href="/html/result.html">云市场</a></li>
+                <li class="layui-nav-item layui-nav-itemed"><a href="#" id="yunshichang" onclick="tabadd(this)">云市场</a></li>
                 <li class="layui-nav-item"><a href="#">发布商品</a></li>
             </ul>
         </div>
@@ -99,20 +99,41 @@
 <script src="/layui/layui.all.js" charset="utf-8"></script>
 <script>
     //JavaScript代码区域
-    var ids=[0];
+    var ids = [0];
     var element = layui.element;
-
+    element.on('tabDelete(demo)', function(data){
+        var id=data.elem.prevObject.prevObject["0"].attributes["0"].value;
+        ids.splice(getIndex(ids,id), 1);
+    });
     function tabadd(ele) {
-
-           ids.push(ele.id)
+        if(inarray(ids,ele.id)){
+            element.tabChange('demo', ele.id); //切换到：用户管理
+        }else{
+            ids.push(ele.id)
             element.tabAdd('demo', {
                 title: ele.innerHTML,
                 content: '<iframe data-frameid="1" frameborder="0" name="content" onload="setIframeHeight(this)" scrolling="no" width="100%" src="/html/LunbotuManger.html"></iframe>',
                 id: ele.id
             })
             element.tabChange('demo', ele.id); //切换到：用户管理
-            console.log(ids.contents(ele.id))
+        }
 
+    }
+
+    function inarray(arr, element) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == element) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function getIndex(arr, element) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == element) {
+                return i;
+            }
+        }
     }
 
     function setIframeHeight(iframe) {
