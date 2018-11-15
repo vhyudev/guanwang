@@ -4,6 +4,7 @@ import com.alibaba.druid.util.StringUtils;
 import com.github.pagehelper.PageHelper;
 import com.hypq.springbootmybatis.domain.LunbotuTable;
 import com.hypq.springbootmybatis.service.LunboService;
+import com.hypq.springbootmybatis.utils.Picupload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,22 +49,13 @@ public class LunboController {
     @RequestMapping("/upload")
     @ResponseBody
     public Map<String, String> fileUpload_2(MultipartFile file, HttpServletRequest request) throws IOException {
-        long startTime = System.currentTimeMillis();
-        System.out.println("fileName:" + file.getOriginalFilename());
-        String realPath = request.getSession().getServletContext().getRealPath("/");
-        System.out.println(realPath);
-        String path = "D:\\guanwang\\guanwang\\src\\main\\resources\\static\\images\\Up_Images\\" + file.getOriginalFilename();
-
-        File newFile = new File(path);
-        //通过CommonsMultipartFile 的方法直接写文件
-        file.transferTo(newFile);
-        long endTime = System.currentTimeMillis();
-        System.out.println("方法二的运行时间：" + String.valueOf(endTime - startTime) + "ms");
+        Picupload.upload(file, request, "D:\\guanwang\\guanwang\\src\\main\\resources\\static\\images\\Up_Images\\");
         Map<String, String> map = new HashMap<>();
         map.put("src", "url(images/Up_Images/" + file.getOriginalFilename() + ")");
         map.put("status", "ok");
         return map;
     }
+
     @RequestMapping("/addLunbotu")
     @ResponseBody
     public Map<String, String> addLunbotu(LunbotuTable lunbotu) {
