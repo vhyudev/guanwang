@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>华瑶康复中心后台管理系统</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+    <script charset="utf-8" src="/kindeditor/kindeditor-all.js"></script>
+    <script charset="utf-8" src="/kindeditor/lang/zh-CN.js"></script>
+
+</head>
+<body>
+<textarea id="kindEditor_demo"></textarea>
+
+</body>
+<script src="/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript">
+    //KindEditor脚本
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('#kindEditor_demo', {
+            filePostName  : "file",
+            uploadJson : '/upload',//post提交图片的地址，在后台按照往常的上传函数接受即可。
+            formatUploadUrl:false,
+
+        });
+    });
+</script>
+</html>
