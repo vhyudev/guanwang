@@ -14,6 +14,7 @@
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
    <!-- <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
@@ -22,18 +23,49 @@
     </script>
     <script type="text/javascript">
         $(function () {
-            var title ;
-            var htmlUrl;
-            var date;
-            var strq = '';
-            alert("2222222")
-            for(var i=0;i<10;i++){
-              strq += "<tr><td width='90%' class='fw_t'><a href='/html/1234685544.html' target='_blank'>华瑶乐园快乐六一bbb掠影</a></td><td width='10%' class='fw_s'>[2018-6-2]</td></tr>";
+            getdata(1, 5)//获取第一页数据
+        })
 
-            }
-            alert(strq);
-            $("#newsList").html(strq);
-        });
+       /* function getdata(pnum, psize) {
+            $("#success").html("")
+            $.post("/getsuccess", {"pnum": pnum, "psize": psize},
+                function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        $("#success").append('<div style="display: flex;justify-content:space-between">\n' +
+                            '\t\t<div><a style="font-size: small" href=' + data[i].url + '>' + data[i].title + '</a></div>\n' +
+                            '\t\t<div style="font-size: small">' + data[i].date + '</div>\n' +
+                            '\t</div>\n' +
+                            '\t<div style="color: #9a9a9a;margin-top: -2px">----------------------------------------------------------' +
+                            '------------------------------------------------------------------------------------------------</div>\n')
+                    }
+                }, "json");
+            $.post("/getpagecount", {"psize": psize}, function (data) {
+                //显示分页条
+                $("#page").html("")
+                $("#page").append('<div class=\'t_page ColorLink\'>总数：' + data.count + '条&nbsp;&nbsp;当前页数：' +
+                    '<span class=\'FontRed\'>' + pnum + '</span>/' + data.pagecount + '' +
+                    '<a href="#" onclick="getdata(1,' + psize + ')">首页</a>' +
+                    '<span id="shangyiye"><a href=# onclick="getdata(' + (pnum - 1) + ',' + psize + ')">上一页</a></span>' +
+                    '<span id="pagenum"></span> ' +
+                    '<span id="xiayiye"><a href=# onclick="getdata(' + (pnum + 1) + ',' + psize + ')">下一页</a></span>' +
+                    '<a href="#" onclick="getdata(' + data.pagecount + ',' + psize + ')">尾页</a></div>\n')
+                //遍历页码
+                $("#pagenum").html("");
+                for (var i = 0; i < data.pagecount; i++) {
+                    $("#pagenum").append("<a href='#' onclick='getdata(" + (i + 1) + "," + psize + ")'>" + (i + 1) + "</a>")
+                }
+                //上一下，下一页调整
+                if (pnum == 1) {
+                    $("#shangyiye").html("");
+                    $("#shangyiye").append("上一页")
+                }
+                if (pnum == data.pagecount) {
+                    $("#xiayiye").html("");
+                    $("#xiayiye").append("下一页")
+                }
+            }, "json")
+
+        }*/
 
     </script>
 </head>
@@ -121,16 +153,14 @@
                 <!--main start-->
                 <div class="main">
 
-                    <div class="ArticleList">
-                        <table id="newsList" width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr><td width='90%' class='fw_t'><a href='/html/1234685544.html' target='_blank'>华瑶乐园快乐六一bbb掠影</a></td><td width='10%' class='fw_s'>[2018-6-2]</td></tr>
-                            <tr>
-                                <td colspan="3"   height="10"></td>
-                            </tr>
-                        </table>
-                        <div class="clearfix"></div>
-                        <div class='t_page ColorLink'>总数：148条&nbsp;&nbsp;当前页数：<span class='FontRed'>1</span>/8<a href=index.html>首页</a>&nbsp;&nbsp;上一页&nbsp;&nbsp;<a href=index.html>1</a> <a href=list_2.html>2</a> <a href=list_3.html>3</a> <a href=list_4.html>4</a> <a href=list_5.html>5</a> <a href=list_2.html>下一页</a><a href=list_8.html>尾页</a></div>
+                    <!--content start-->
+                    <div class="content">
+                        <div class="maincontent clearfix" id="success">
+
+                        </div>
+                        <div id="page"></div>
                     </div>
+                    <!--content end-->
 
                 </div>
                 <!--main end-->

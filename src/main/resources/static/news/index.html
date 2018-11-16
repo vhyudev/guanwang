@@ -10,8 +10,15 @@
 <link href="../css/HituxCMSBold/common.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../js/functions.js"></script>
 <script type="text/javascript" src="../images/iepng/iepngfix_tilebg.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript">
 window.onerror=function(){return true;}
+</script>
+<script type="text/javascript">
+    $(function () {
+        getdata(1, 5,"","/getnews","/getnewsCount")//获取第一页数据
+    })
 </script>
 </head>
 
@@ -96,21 +103,19 @@ window.onerror=function(){return true;}
 <div class="Position"><span>你的位置：<a href="/">首页</a> > <a href='/News/index.html'>新闻动态</a></span></div>
 <div class="HeightTab clearfix"></div>
 <!--main start-->
-<div class="main">
+    <div class="main">
 
-<div class="ArticleList">
-	  <table  width="100%" border="0" cellspacing="0" cellpadding="0">
-<ul><tr><td width='90%' class='fw_t'>·<a href='/html/1234685544.html' target='_blank'>华瑶乐园快乐六一bbb掠影</a></td><td width='10%' class='fw_s'>[2018-6-2]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/2896102041.html' target='_blank'>2018华瑶春节放假安排</a></td><td width='10%' class='fw_s'>[2018-2-9]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/1648904713.html' target='_blank'>天津南方传媒珠江艾茉森数码钢琴公益行---走进华瑶自闭症儿童康复中心</a></td><td width='10%' class='fw_s'>[2017-8-17]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/3591764842.html' target='_blank'>放假通知（2017年7月22日-30日）</a></td><td width='10%' class='fw_s'>[2017-7-21]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/4086732833.html' target='_blank'>陈美城老师、张毅老师参加《发展性疗育课程》培训</a></td><td width='10%' class='fw_s'>[2017-6-8]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/1673024836.html' target='_blank'>谭芳老师参加奥尔夫音乐培训</a></td><td width='10%' class='fw_s'>[2017-5-10]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/5921035742.html' target='_blank'>自闭症儿童训练计划（干货）</a></td><td width='10%' class='fw_s'>[2017-3-23]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/0279165021.html' target='_blank'>华瑶2017年春节放假时间安排</a></td><td width='10%' class='fw_s'>[2017-1-20]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/603285415.html' target='_blank'>天津塔圣诞亮灯 为自闭症项目筹款</a></td><td width='10%' class='fw_s'>[2016-12-5]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/7581694438.html' target='_blank'>感谢天津凯利特公司捐赠玩具一批</a></td><td width='10%' class='fw_s'>[2016-11-28]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/604837367.html' target='_blank'>自闭症儿童语言理解能力的训练</a></td><td width='10%' class='fw_s'>[2016-11-24]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/2307181335.html' target='_blank'>没有口语的自闭症儿童的语言训练（二）</a></td><td width='10%' class='fw_s'>[2016-11-18]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/461372049.html' target='_blank'>没有口语的自闭症儿童的语言训练（一）</a></td><td width='10%' class='fw_s'>[2016-11-8]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/0975241232.html' target='_blank'>自闭症患儿家庭康复今后将有“中国版指南”</a></td><td width='10%' class='fw_s'>[2016-11-8]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/7130842754.html' target='_blank'>如何给自闭症儿童上小组融合课</a></td><td width='10%' class='fw_s'>[2016-11-7]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/7081341018.html' target='_blank'>自闭症儿童语言训练的思路</a></td><td width='10%' class='fw_s'>[2016-10-26]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/0147525817.html' target='_blank'>关于自闭症儿童行为自控技能的训练及其对问题行为的治疗</a></td><td width='10%' class='fw_s'>[2016-10-18]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/4938053813.html' target='_blank'>华瑶2016中秋节放假安排</a></td><td width='10%' class='fw_s'>[2016-9-14]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/56134993.html' target='_blank'>开学季： “自闭症陪读策略”</a></td><td width='10%' class='fw_s'>[2016-9-2]</td></tr><tr><td width='90%' class='fw_t'>·<a href='/html/0687515647.html' target='_blank'>温州自闭症画家作品</a></td><td width='10%' class='fw_s'>[2016-9-2]</td></tr></ul>
-        <tr>
-          <td colspan="3"   height="10"></td>
-        </tr>
-      </table>
-<div class="clearfix"></div>
-	  <div class='t_page ColorLink'>总数：148条&nbsp;&nbsp;当前页数：<span class='FontRed'>1</span>/8<a href=index.html>首页</a>&nbsp;&nbsp;上一页&nbsp;&nbsp;<a href=index.html>1</a> <a href=list_2.html>2</a> <a href=list_3.html>3</a> <a href=list_4.html>4</a> <a href=list_5.html>5</a> <a href=list_2.html>下一页</a><a href=list_8.html>尾页</a></div>
-</div>
+        <!--content start-->
+        <div class="content">
+            <div class="maincontent clearfix" id="success">
 
-</div>
-<!--main end-->
+            </div>
+            <div id="page"></div>
+        </div>
+        <!--content end-->
+
+    </div>
+    <!--main end-->
 </div>
 <!--right end-->
 </div>
