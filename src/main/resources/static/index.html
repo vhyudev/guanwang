@@ -469,12 +469,12 @@
                         <div class="TopicTitle"><a href="/Successfulcase/index.html">成功案例</a></div>
                         <div class="TopicMore"><a href='/Successfulcase/index.html'><img src="images/more.png"></a></div>
                     </div>
-                    <div class="left" style="display: flex;justify-content: space-between">
-                    <div class='img'><a href='/Successfulcase/index.html' target='_blank'><img
+                    <div class="left" style="display: flex;justify-content: flex-start">
+                    <div class='img' style="width:260px"><a href='/Successfulcase/index.html' target='_blank'><img
                             src='images/Up_Images/succuss_example.jpg' width='250' height='205' alt='成功案例'></a></div>
-                    <div style="display: flex;position: relative;left: 40px">
+                    <div>
 
-                        <table id="chengGongAnLi"  width='100%' border='0' cellspacing='0' cellpadding='0'>
+                        <table id="chengGongAnLi"  width='100%' border='0' cellspacing='0' cellpadding='0' >
 
                         </table>
 
@@ -566,9 +566,8 @@
         $.post("/getsuccess",{"pnum":1,"psize":8},function(data){
             for(var i=0;i<data.length;i++){
                 $("#chengGongAnLi").append("  <tr>\n" +
-                    "<td width='70%'>· <a href='"+data[i].url+"' target='_blank'\n" +
-                    "title='"+data[i].title+"' style='font-size: 6px;line-height:25px'>"+data[i].title+"</a></td>\n" +
-                    "<td width='30%'></td>\n" +
+                    "<td width='100%'><p style='text-align: left'> <a  href=/Successfulcase/SuccessExample/success0001.html?id="+data[i].id+" target='_blank'\n" +
+                    "title='"+data[i].title+"' style='font-size: 6px;line-height:25px'>"+data[i].title+"</a></p></td>\n" +
                     "</tr>")
             }
 

@@ -11,32 +11,139 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
 
-    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
     <script charset="utf-8" src="/kindeditor/kindeditor-all.js"></script>
     <script charset="utf-8" src="/kindeditor/lang/zh-CN.js"></script>
     <script src="/layui/layui.all.js" charset="utf-8"></script>
     <script src="/js/jquery.min.js"></script>
 </head>
 <body>
-<textarea id="kindEditor_demo"></textarea>
-<button type="button" class="layui-btn" id="test1" onclick="tijiao()">提交</button>
+<form id="tanchuceng" class="layui-form" lay-filter="formTest" action="">
+
+    <input type="hidden" value="" name="id">
+    <div class="layui-form-item">
+        <label class="layui-form-label">标题</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">日期</label>
+        <div class="layui-input-inline">
+            <input type="text" name="date" required lay-verify="required" placeholder="例:2018年5月02日" autocomplete="off"
+                   class="layui-input">
+        </div>
+
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">正文</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" id="kindEditor_demo" name="remark"></textarea>
+        </div>
+    </div>
+    <br>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="tijiao()">立即提交</button>
+            <button  class="layui-btn layui-btn-primary" onclick="tianjia()">添加</button>
+        </div>
+    </div>
+</form>
+<script type="text/html" id="barDemo">
+    <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<table id="demo" lay-filter="test"></table>
 </body>
 <script src="/layui/layui.all.js" charset="utf-8"></script>
 <script type="text/javascript">
     //KindEditor脚本
     var editor;
-    KindEditor.ready(function(K) {
+    KindEditor.ready(function (K) {
         editor = K.create('#kindEditor_demo', {
-            filePostName  : "file",
-            uploadJson : '/uploadPic',//post提交图片的地址，在后台按照往常的上传函数接受即可。
-            formatUploadUrl:false,
-
+            filePostName: "file",
+            uploadJson: '/uploadPic',//post提交图片的地址，在后台按照往常的上传函数接受即可。
+            formatUploadUrl: false,
+            width: "847px",
+            heigth:"430px"
         });
     });
-    function  tijiao() {
-        editor.sync();//将KindEditor的数据同步到textarea标签。
-        var value_content = $("#kindEditor_demo").val();
-        console.log(value_content)
+    var table = layui.table;
+    var form = layui.form;
+    var layer = layui.layer;
+    //第一个实例
+    table.render({
+        elem: '#demo'
+        , height: 520
+        , url: '/getSuccessItems' //数据接口
+        , cols: [[ //表头
+            , {field: 'id', title: 'ID', width: 45}
+            , {field: 'title', title: '标题名称', width: 100}
+            , {field: 'date', title: '添加日期', width: 150}
+            , {field: 'remark', title: 'HTML样式文本', width: 100}
+            , {fixed: 'right', width: 178, align: 'center', toolbar: '#barDemo'}
+        ]]
+        , page: true //开启分页
+    });
+    var index;
+    table.on('toolbar(test)', function (obj) {
+        var checkStatus = table.checkStatus(obj.config.id);
+
+
+    });
+    table.on('checkbox(test)', function (obj) {
+        console.log(obj)
+    });
+    //监听工具条
+    table.on('tool(test)', function (obj) {
+        var data = obj.data;
+        if (obj.event === 'detail') {
+
+        } else if (obj.event === 'del') {
+            layer.confirm('确定删除此条数据?', function (index) {
+                $.post("/deleteSuccessCase", {"id": data.id}, function (data) {
+                    if (data.msg == "ok") {
+                        layer.msg("操作成功")
+
+                        table.reload("demo")
+                    }
+                })
+            })
+        } else if (obj.event === 'edit') {
+            form.val("formTest", data)
+            editor.html(data.remark)
+            console.log(data.id)
+            /*index =   layer.open({
+                area: ['1000px', '500px'],
+                title:'修改轮播图',
+                type: 1,
+                content: $('#tanchuceng') //这里content是一个普通的String
+            });*/
+        }
+    });
+
+    //监听提交
+    function tijiao() {
+        editor.sync();
+        var param = $("#tanchuceng").serialize();
+        $.post("/addSuccesscase", param, function (data) {
+            if (data.msg == "ok") {
+
+            }
+        })
     }
+    function tianjia() {
+        form.val("formTest", {
+            "id": "" // "name": "value"
+            ,"title": ""
+            ,"date": ""
+
+        })
+        editor.html("")
+    }
+
 </script>
 </html>

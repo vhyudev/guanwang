@@ -7,4 +7,12 @@ import java.util.List;
 public interface SuccessService {
     int getCount();
     List<SuccessTable> getAll();
+
+    void addSuccess(SuccessTable st);
+
+    List<SuccessTable> getSuccessItems();
+
+    void deleteSuccessCase(String id);
+
+    SuccessTable getSuccessById(Integer id);
 }

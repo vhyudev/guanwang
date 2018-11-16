@@ -151,27 +151,7 @@
                     <!--content start-->
                     <div class="content">
                         <div class="maincontent clearfix" id="success">
-                            <p>
-                                <br />
-                            </p>
-                            <p>
-                                <br />
-                            </p>
-                            <p>
-                                <span><span><span><span>我们是好孩子</span></span></span></span>
-                            </p>
-                            <p style="text-align:center;">
-                                <img src="/images/Up_Images/2012521212111.jpg" alt="" />
-                            </p>
-                            <p>
-                                <span><span><span><span><span><span><span><span><span><span>认为不同</span></span></span></span></span></span></span></span></span></span>
-                            </p>
-                            <p>
-                                <span><span><span><span><span><span><span><span><span><span>这是疯狂的。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>不符合者。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>反叛者。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>麻烦制造者。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>圆钉在方孔。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>那些以不同方式看待事物的人。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>他们不喜欢规则。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>他们不尊重现状。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>你可以引用它们，不同意它们，美化或诋毁它们。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>关于你唯一不能做的就是忽略它们</span></span></span></span></span></span></span><span><span><span><span><span><span><span>。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>因为他们改变了一切。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>他们推动人类向前发展。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>虽然有些人可能认为它们是疯狂的</span></span></span></span></span></span></span><span><span><span><span><span><span><span>，但我们看到了天才。</span></span></span></span></span></span></span></span></span><span><span><span><span><span><span><span><span><span>因为那些疯狂到足以让他们认为自己可以改变世界的人才能做到</span></span></span></span></span></span></span><span><span><span><span><span><span><span>。</span></span></span></span></span></span></span></span></span></span>
-                            </p>
-                            <p>
-                                <span><span><span><span><span><span><span><span><span><span>- 苹果公司。</span></span></span></span></span></span></span></span></span></span>
-                            </p>
+
                         </div>
                         <div id="page"></div>
                     </div>
@@ -245,14 +225,22 @@
 </div>
 <script type="text/javascript" src="../js/ServiceCenter.js"></script>
 <script type="text/javascript">
+    var id;
     $(function () {
-        var id=getQueryString("id")
-    })
-    function getQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var reg = new RegExp("(^|&)id=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]); return null;
-    }
+        if (r != null){
+            id= unescape(r[2]);
+        }else{
+            id=null
+        }
+
+        $.post("/getSuccessById",{"id":id},function (data) {
+                $("#success").html("")
+            $("#success").append(data.remark)
+        })
+    })
+
 </script>
 
 </body>

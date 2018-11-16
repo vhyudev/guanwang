@@ -1,6 +1,8 @@
 package com.hypq.springbootmybatis.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.github.pagehelper.PageHelper;
+import com.hypq.springbootmybatis.domain.LunbotuTable;
 import com.hypq.springbootmybatis.domain.SuccessTable;
 import com.hypq.springbootmybatis.service.SuccessService;
 import com.hypq.springbootmybatis.utils.Picupload;
@@ -42,9 +44,9 @@ public class SuccessController {
     public Map<String,Object> uploadPic(MultipartFile file, HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
         try {
-            Picupload.upload(file,request,"D:\\guanwang\\guanwang\\src\\main\\resources\\static\\images\\Up_Images\\");
+            Picupload.upload(file,request,"D:\\pic\\");
            String name= file.getOriginalFilename();
-           String url="/images/Up_Images/"+name;
+           String url="/pic/"+name;
 
             map.put("error",0);
             map.put("url",url);
@@ -55,5 +57,64 @@ public class SuccessController {
         }
 
 
+    }
+
+    @RequestMapping("/addSuccesscase")
+    @ResponseBody
+    public Map<String, String> addLunbotu(SuccessTable st) {
+        Map<String, String> map = new HashMap<>();
+        try {
+            service.addSuccess(st);
+
+            map.put("msg", "ok");
+            return map;
+        } catch (Exception e) {
+            map.put("msg", "fail");
+            return map;
+        }
+
+
+    }
+    @RequestMapping("/getSuccessItems")
+    @ResponseBody
+    public Map<String, Object> getItems(String page, String limit) {
+        if (StringUtils.isEmpty(page)) {
+            page = "1";
+        }
+        if (StringUtils.isEmpty(limit)) {
+            limit = "10";
+        }
+        PageHelper.startPage(Integer.valueOf(page), Integer.valueOf(limit));
+        List<SuccessTable> list = service.getSuccessItems();
+        int count = service.getCount();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", null);
+        map.put("count", count);
+        map.put("data", list);
+        return map;
+    }
+
+    @RequestMapping("/deleteSuccessCase")
+    @ResponseBody
+    public Map<String, String> deleteSuccessCase(String id) {
+        Map<String, String> map = new HashMap<>();
+        try {
+            service.deleteSuccessCase(id);
+
+            map.put("msg", "ok");
+            return map;
+        } catch (Exception e) {
+            map.put("msg", "fail");
+            return map;
+        }
+
+
+    }
+
+    @RequestMapping("/getSuccessById")
+    @ResponseBody
+    public SuccessTable getSuccessById(Integer id){
+       return service.getSuccessById(id);
     }
 }
