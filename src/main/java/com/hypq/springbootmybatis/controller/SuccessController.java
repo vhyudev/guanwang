@@ -3,11 +3,14 @@ package com.hypq.springbootmybatis.controller;
 import com.github.pagehelper.PageHelper;
 import com.hypq.springbootmybatis.domain.SuccessTable;
 import com.hypq.springbootmybatis.service.SuccessService;
+import com.hypq.springbootmybatis.utils.Picupload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,5 +36,24 @@ public class SuccessController {
         map.put("pagecount",pagenum);
         map.put("count",count);
         return map;
+    }
+    @RequestMapping("/uploadPic")
+    @ResponseBody
+    public Map<String,Object> uploadPic(MultipartFile file, HttpServletRequest request){
+        Map<String,Object> map = new HashMap<>();
+        try {
+            Picupload.upload(file,request,"D:\\guanwang\\guanwang\\src\\main\\resources\\static\\images\\Up_Images\\");
+           String name= file.getOriginalFilename();
+           String url="/images/Up_Images/"+name;
+
+            map.put("error",0);
+            map.put("url",url);
+           return map;
+        }catch (Exception e){
+            map.put("message","上传错误");
+            return map ;
+        }
+
+
     }
 }

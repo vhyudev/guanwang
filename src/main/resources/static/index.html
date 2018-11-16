@@ -14,9 +14,8 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/en_functions.js"></script>
     <script type="text/javascript" src="js/en_focusslide.js"></script>
-    <script type="text/javascript" src="js/ScrollPic.js"></script>
     <script type="text/javascript" src="images/iepng/iepngfix_tilebg.js"></script>
-
+    <script type="text/javascript" src="js/ScrollPic.js"></script>
     <script
             type="text/javascript">
         window.onerror = function () {
@@ -91,13 +90,8 @@
 
         <div class="fullSlide">
             <div class="bd">
-                <ul>
-                    <li _src="url(images/Up_Images/201489222212.jpg)" style='background:#FFFFFF center 0 no-repeat;'><a
-                            href='/About/index.html' target='_blank'></a></li>
-                    <li _src="url(images/Up_Images/201489205410.jpg)" style='background:#FECF67 center 0 no-repeat;'><a
-                            href='/About/index.html' target='_blank'></a></li>
-                    <li _src="url(images/Up_Images/2014811101939.jpg)" style='background:#A2DB7C center 0 no-repeat;'><a
-                            href='/html/2735612243.html' target='_blank'></a></li>
+                <ul id="lunbo">
+
                 </ul>
             </div>
             <div class="hd">
@@ -105,28 +99,6 @@
                 </ul>
             </div>
             <span class="prev"></span> <span class="next"></span></div>
-        <script type="text/javascript">
-            jQuery(".fullSlide").hover(function () {
-                    jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
-                },
-                function () {
-                    jQuery(this).find(".prev,.next").fadeOut()
-                });
-            jQuery(".fullSlide").slide({
-                titCell: ".hd ul",
-                mainCell: ".bd ul",
-                effect: "fold",
-                autoPlay: true,
-                autoPage: true,
-                trigger: "click",
-                startFun: function (i) {
-                    var curLi = jQuery(".fullSlide .bd li").eq(i);
-                    if (!!curLi.attr("_src")) {
-                        curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
-                    }
-                }
-            });
-        </script>
 
 
     </div>
@@ -502,48 +474,8 @@
                             src='images/Up_Images/succuss_example.jpg' width='250' height='205' alt='成功案例'></a></div>
                     <div style="display: flex;position: relative;left: 40px">
 
-                        <table  width='100%' border='0' cellspacing='0' cellpadding='0'>
-                            <tr>
-                                <td width='80%'>· <a href='/html/5921035742.html' target='_blank'
-                                                     title='自闭症儿童训练计划（干货）'>自闭症儿童训练计划（干货）</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/604837367.html' target='_blank'
-                                                     title='自闭症儿童语言理解能力的训练'>自闭症儿童语言理解能力的训练</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/2307181335.html' target='_blank'
-                                                     title='没有口语的自闭症儿童的语言训练（二）'>没有口语的自闭症儿童的语言训练（二）</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/461372049.html' target='_blank'
-                                                     title='没有口语的自闭症儿童的语言训练（一）'>没有口语的自闭症儿童的语言训练（一）</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/7130842754.html' target='_blank'
-                                                     title='如何给自闭症儿童上小组融合课'>如何给自闭症儿童上小组融合课</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/7081341018.html' target='_blank'
-                                                     title='自闭症儿童语言训练的思路'>自闭症儿童语言训练的思路</a></td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/0147525817.html' target='_blank'
-                                                     title='关于自闭症儿童行为自控技能的训练及其对问题行为的治疗'>关于自闭症儿童行为自控技能的训练</a>
-                                </td>
-                                <td width='20%'></td>
-                            </tr>
-                            <tr>
-                                <td width='80%'>· <a href='/html/908675100.html' target='_blank'
-                                                     title='自闭症早期家庭训练指导方法（1）'>自闭症早期家庭训练指导方法（1）</a></td>
-                                <td width='20%'></td>
-                            </tr>
+                        <table id="chengGongAnLi"  width='100%' border='0' cellspacing='0' cellpadding='0'>
+
                         </table>
 
                     </div>
@@ -613,16 +545,11 @@
         </div>
         <div class='InnerRight'>
             <div class='tel'>022 8678 8187</div>
-            <div class='SearchTop'>
+            <!--<div class='SearchTop'>
                 <div class="SearchBar">
-                    <form method="get" action="/Search/index.asp">
-                        <input type="text" name="q" id="search-text" size="15"
-                               onBlur="if(this.value=='') this.value='Keywords';"
-                               onfocus="if(this.value=='Keywords') this.value='';" value="Keywords"/><input
-                            type="submit" id="search-submit" value=" "/>
-                    </form>
+
                 </div>
-            </div>
+            </div>先不显示搜索框-->
 
         </div>
 
@@ -634,9 +561,50 @@
 
 </div>
 <script type="text/javascript" src="/js/ServiceCenter.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.post("/getsuccess",{"pnum":1,"psize":8},function(data){
+            for(var i=0;i<data.length;i++){
+                $("#chengGongAnLi").append("  <tr>\n" +
+                    "<td width='70%'>· <a href='"+data[i].url+"' target='_blank'\n" +
+                    "title='"+data[i].title+"' style='font-size: 6px;line-height:25px'>"+data[i].title+"</a></td>\n" +
+                    "<td width='30%'></td>\n" +
+                    "</tr>")
+            }
 
+
+        })
+
+        $.post("/getItems",{},function (mapdata) {
+            var data=mapdata.data;
+            for(var i=0;i<data.length;i++){
+                $("#lunbo").append('<li _src="'+data[i].src+'" style=\'background:'+data[i].bgcolor+' center 0 no-repeat;\'><a href="'+data[i].href+'" target=\'_blank\'></a></li>')
+            }
+            jQuery(".fullSlide").hover(function () {
+                    jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+                },
+                function () {
+                    jQuery(this).find(".prev,.next").fadeOut()
+                });
+            jQuery(".fullSlide").slide({
+                titCell: ".hd ul",
+                mainCell: ".bd ul",
+                effect: "fold",
+                autoPlay: true,
+                autoPage: true,
+                trigger: "click",
+                startFun: function (i) {
+                    var curLi = jQuery(".fullSlide .bd li").eq(i);
+                    if (!!curLi.attr("_src")) {
+                        curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+                    }
+                }
+            });
+        })
+    })
+</script>
 </body>
 </html>
 <!--
-Powered By HituxCMS ASP V2.1 
+Powered By HituxCMS ASP V2.1
 -->

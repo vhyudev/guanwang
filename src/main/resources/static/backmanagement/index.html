@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>华瑶康复中心后台管理系统</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">&nbsp华瑶康复中心后台管理系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="/html/result.html">控制台</a></li>
+            <li class="layui-nav-item"><a href="">商品管理</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
+                         class="layui-nav-img">
+                    贤心
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退了</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;" id="lunbotuguangli" name="LunbotuManger.html" onclick="tabadd(this)">轮播图管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">解决方案</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">列表一</a></dd>
+                        <dd><a href="javascript:;">列表二</a></dd>
+                        <dd><a href="">超链接</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed"><a href="#" name="SuccesscaseManager.html" id="yunshichang" onclick="tabadd(this)">案例管理</a></li>
+                <li class="layui-nav-item"><a href="#">发布商品</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <div class="layui-tab" lay-filter="demo" lay-allowclose="true">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" lay-id="11">首页</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">欢迎来到,华瑶后台管理系统!</div>
+
+                </div>
+            </div>
+
+            <br><br>
+
+
+            <br>
+
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © http://www.hypqjk.com - 华瑶普洽谈(天津)健康科技有限公司
+    </div>
+</div>
+
+<script src="/layui/layui.all.js" charset="utf-8"></script>
+<script>
+    //JavaScript代码区域
+    var ids = [0];
+    var element = layui.element;
+    element.on('tabDelete(demo)', function(data){
+        var id=data.elem.prevObject.prevObject["0"].attributes["0"].value;
+        ids.splice(getIndex(ids,id), 1);
+    });
+    function tabadd(ele) {
+        if(inarray(ids,ele.id)){
+            element.tabChange('demo', ele.id); //切换到：用户管理
+        }else{
+            ids.push(ele.id)
+            element.tabAdd('demo', {
+                title: ele.innerHTML,
+                content: '<iframe data-frameid="1" frameborder="0" name="content" onload="setIframeHeight(this)" scrolling="no" width="100%" src="/html/'+ele.name+'"></iframe>',
+                id: ele.id
+            })
+            element.tabChange('demo', ele.id); //切换到：用户管理
+        }
+
+    }
+
+    function inarray(arr, element) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == element) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function getIndex(arr, element) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == element) {
+                return i;
+            }
+        }
+    }
+
+    function setIframeHeight(iframe) {
+        iframe.height = document.documentElement.scrollHeight || document.body.scrollHeight;
+    };
+</script>
+</body>
+</html>
