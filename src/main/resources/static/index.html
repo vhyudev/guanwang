@@ -563,7 +563,7 @@
 <script type="text/javascript" src="/js/ServiceCenter.js"></script>
 <script type="text/javascript">
     $(function () {
-        $.post("/getsuccess",{"pnum":1,"psize":8},function(data){
+        $.post("/getsuccess",{"pnum":1,"psize":7},function(data){
             for(var i=0;i<data.length;i++){
                 $("#chengGongAnLi").append("  <tr>\n" +
                     "<td width='100%'><p style='text-align: left'> <a  href=/Successfulcase/SuccessExample/success0001.html?id="+data[i].id+" target='_blank'\n" +

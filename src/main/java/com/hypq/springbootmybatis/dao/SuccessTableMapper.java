@@ -27,4 +27,8 @@ public interface SuccessTableMapper {
     int updateByPrimaryKeySelective(SuccessTable record);
 
     int updateByPrimaryKey(SuccessTable record);
+
+    SuccessTable getUp(Integer id);
+
+    SuccessTable getDown(Integer id);
 }

@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import sun.plugin.util.UIUtil;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -53,6 +55,17 @@ public class SuccessServiceImpl implements SuccessService {
     @Override
     public SuccessTable getSuccessById(Integer id) {
         return mapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Map<String,SuccessTable> getUpandDown(Integer id) {
+        Map<String,SuccessTable> map=new HashMap<>();
+
+        SuccessTable sup = mapper.getUp(id);
+        SuccessTable sdown = mapper.getDown(id);
+        map.put("upitem",sup);
+        map.put("downitem",sdown);
+        return map;
     }
 
     public int getCount(){

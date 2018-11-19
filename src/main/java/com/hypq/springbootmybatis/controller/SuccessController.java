@@ -21,39 +21,41 @@ import java.util.Map;
 public class SuccessController {
     @Autowired
     SuccessService service;
+
     @RequestMapping("/getsuccess")
     @ResponseBody
-    public List<SuccessTable> getByPage(int pnum,int psize){
-        PageHelper.startPage(pnum,psize);
-        List<SuccessTable> list=service.getAll();
+    public List<SuccessTable> getByPage(int pnum, int psize) {
+        PageHelper.startPage(pnum, psize);
+        List<SuccessTable> list = service.getAll();
         return list;
     }
 
     @RequestMapping("/getpagecount")
     @ResponseBody
-    public Map<String,Integer> getPageCount(int psize){
+    public Map<String, Integer> getPageCount(int psize) {
         int count = service.getCount();
-        int pagenum=count%psize==0?count/psize:count/psize+1;
-        Map<String,Integer> map = new HashMap<>();
-        map.put("pagecount",pagenum);
-        map.put("count",count);
+        int pagenum = count % psize == 0 ? count / psize : count / psize + 1;
+        Map<String, Integer> map = new HashMap<>();
+        map.put("pagecount", pagenum);
+        map.put("count", count);
         return map;
     }
+
     @RequestMapping("/uploadPic")
     @ResponseBody
-    public Map<String,Object> uploadPic(MultipartFile file, HttpServletRequest request){
-        Map<String,Object> map = new HashMap<>();
+    public Map<String, Object> uploadPic(MultipartFile file, HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
         try {
-            Picupload.upload(file,request,"D:\\pic\\");
-           String name= file.getOriginalFilename();
-           String url="/pic/"+name;
+            Picupload.upload(file, request, "D:\\pic\\");
+            String name = file.getOriginalFilename();
+            String url = "/pic/" + name;
 
-            map.put("error",0);
-            map.put("url",url);
-           return map;
-        }catch (Exception e){
-            map.put("message","上传错误");
-            return map ;
+            map.put("error", 0);
+            map.put("url", url);
+            return map;
+        } catch (Exception e) {
+            map.put("message", "上传错误");
+            return map;
         }
 
 
@@ -75,6 +77,7 @@ public class SuccessController {
 
 
     }
+
     @RequestMapping("/getSuccessItems")
     @ResponseBody
     public Map<String, Object> getItems(String page, String limit) {
@@ -114,7 +117,15 @@ public class SuccessController {
 
     @RequestMapping("/getSuccessById")
     @ResponseBody
-    public SuccessTable getSuccessById(Integer id){
-       return service.getSuccessById(id);
+    public SuccessTable getSuccessById(Integer id) {
+        return service.getSuccessById(id);
     }
+
+    @RequestMapping("/UpandDown")
+    @ResponseBody
+    public Map<String,SuccessTable> UpandDown(Integer id) {
+        return service.getUpandDown(id);
+    }
+
 }
+

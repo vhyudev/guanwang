@@ -155,6 +155,12 @@
                         </div>
                         <div id="page"></div>
                     </div>
+                    <br/>
+                    <div>
+                        上一条:&nbsp&nbsp<span id="up"></span>
+                        <br/><br/>
+                        下一条:&nbsp&nbsp<span id="down"></span>
+                    </div>
                     <!--content end-->
 
                 </div>
@@ -236,8 +242,25 @@
         }
 
         $.post("/getSuccessById",{"id":id},function (data) {
-                $("#success").html("")
+            $("#success").html("")
             $("#success").append(data.remark)
+        })
+        $.post("/UpandDown",{"id":id},function (data) {
+
+            var up=data.upitem;
+            var down=data.downitem;
+            if(typeof(up)=="undefined"){
+                $("#up").append("没有了!");
+            }else {
+                $("#up").append("<a href=success0001.html?id="+up.id+">"+up.title+"</a>");
+            }
+
+            if(typeof(down)=="undefined"){
+                $("#down").append("没有了!");
+            }else{
+                $("#down").append("<a href=success0001.html?id="+down.id+">"+down.title+"</a>")
+            }
+
         })
     })
 

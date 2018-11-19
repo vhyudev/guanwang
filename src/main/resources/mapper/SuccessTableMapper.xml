@@ -157,6 +157,20 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+<select id="getUp" parameterType="java.lang.Integer" resultType="com.hypq.springbootmybatis.domain.SuccessTable">
+  select *
+  from success_table
+  WHERE
+  success_table.id = (select id from success_table where id &lt; #{id} order by id desc limit 1)
+
+</select>
+  <select id="getDown" parameterType="java.lang.Integer" resultType="com.hypq.springbootmybatis.domain.SuccessTable">
+    select *
+    from success_table
+    WHERE
+    success_table.id = (select id from success_table where id &gt; #{id} order by id asc limit 1)
+
+  </select>
   <update id="updateByExampleSelective" parameterType="map" >
     update success_table
     <set >
