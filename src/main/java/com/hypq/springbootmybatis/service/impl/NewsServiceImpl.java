@@ -33,6 +33,11 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public List<NewsDetail> getByType(String type) {
         List<NewsDetail> newsTables = ndMapper.getByType(type);
+        if(newsTables != null && newsTables.size()>0){
+            for(int i = 0;i<newsTables.size();i++){
+                newsTables.get(i).setUrl("newsDetail.html?id="+newsTables.get(i).getId());
+            }
+        }
         return newsTables;
     }
 
