@@ -2,9 +2,9 @@ package com.hypq.springbootmybatis.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
-import com.hypq.springbootmybatis.dao.NewsTableMapper;
-import com.hypq.springbootmybatis.domain.NewsTable;
-import com.hypq.springbootmybatis.domain.NewsTableExample;
+import com.hypq.springbootmybatis.dao.NewsDetailMapper;
+import com.hypq.springbootmybatis.domain.NewsDetail;
+import com.hypq.springbootmybatis.domain.NewsDetailExample;
 import com.hypq.springbootmybatis.domain.User;
 import com.hypq.springbootmybatis.service.UserService;
 import com.hypq.springbootmybatis.utils.CreateHtmlUtils;
@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +30,7 @@ public class UserController {
     @Autowired
     RedisUtils ru;
     @Resource
-    NewsTableMapper mapper;
+    NewsDetailMapper mapper;
 
 
     @RequestMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -68,12 +66,12 @@ public class UserController {
 
     @RequestMapping("/test2")
     @ResponseBody
-    public List<NewsTable>  test(int pagenum,int pagesize) {
+    public List<NewsDetail>  test(int pagenum,int pagesize) {
         System.out.println(pagenum);
         System.out.println(pagesize);
         PageHelper.startPage(pagenum,pagesize);//pagenum 0 和 1 代表的都是的第一页
-        NewsTableExample example = new NewsTableExample();
-        List<NewsTable> newsTables = mapper.selectByExample(example);
+        NewsDetailExample example = new NewsDetailExample();
+        List<NewsDetail> newsTables = mapper.selectByExample(example);
         return newsTables;
     }
 

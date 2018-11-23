@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hypq.springbootmybatis.dao.NewsDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.hypq.springbootmybatis.domain.NewsDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="publish_date" property="publishDate" jdbcType="TIMESTAMP" />
+    <result column="clickCount" property="clickcount" jdbcType="INTEGER" />
+    <result column="next_article" property="nextArticle" jdbcType="VARCHAR" />
+    <result column="before_article" property="beforeArticle" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    <result column="uploadDate" property="uploaddate" jdbcType="TIMESTAMP" />
+    <result column="article_type" property="articleType" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hypq.springbootmybatis.domain.NewsDetail" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, publish_date, clickCount, next_article, before_article, remark, remark1, 
+    uploadDate, article_type, url
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hypq.springbootmybatis.domain.NewsDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hypq.springbootmybatis.domain.NewsDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from news_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hypq.springbootmybatis.domain.NewsDetailExample" >
+    delete from news_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hypq.springbootmybatis.domain.NewsDetail" >
+    insert into news_detail (id, title, publish_date, 
+      clickCount, next_article, before_article, 
+      remark, remark1, uploadDate, 
+      article_type, url, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{publishDate,jdbcType=TIMESTAMP}, 
+      #{clickcount,jdbcType=INTEGER}, #{nextArticle,jdbcType=VARCHAR}, #{beforeArticle,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, #{uploaddate,jdbcType=TIMESTAMP}, 
+      #{articleType,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+    <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.hypq.springbootmybatis.domain.NewsDetail" >
+    insert into news_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="publishDate != null" >
+        publish_date,
+      </if>
+      <if test="clickcount != null" >
+        clickCount,
+      </if>
+      <if test="nextArticle != null" >
+        next_article,
+      </if>
+      <if test="beforeArticle != null" >
+        before_article,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="remark1 != null" >
+        remark1,
+      </if>
+      <if test="uploaddate != null" >
+        uploadDate,
+      </if>
+      <if test="articleType != null" >
+        article_type,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null" >
+        #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clickcount != null" >
+        #{clickcount,jdbcType=INTEGER},
+      </if>
+      <if test="nextArticle != null" >
+        #{nextArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeArticle != null" >
+        #{beforeArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="uploaddate != null" >
+        #{uploaddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleType != null" >
+        #{articleType,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hypq.springbootmybatis.domain.NewsDetailExample" resultType="java.lang.Integer" >
+    select count(*) from news_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update news_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishDate != null" >
+        publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.clickcount != null" >
+        clickCount = #{record.clickcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.nextArticle != null" >
+        next_article = #{record.nextArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeArticle != null" >
+        before_article = #{record.beforeArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark1 != null" >
+        remark1 = #{record.remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploaddate != null" >
+        uploadDate = #{record.uploaddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.articleType != null" >
+        article_type = #{record.articleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update news_detail
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      clickCount = #{record.clickcount,jdbcType=INTEGER},
+      next_article = #{record.nextArticle,jdbcType=VARCHAR},
+      before_article = #{record.beforeArticle,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      remark1 = #{record.remark1,jdbcType=VARCHAR},
+      uploadDate = #{record.uploaddate,jdbcType=TIMESTAMP},
+      article_type = #{record.articleType,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update news_detail
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      clickCount = #{record.clickcount,jdbcType=INTEGER},
+      next_article = #{record.nextArticle,jdbcType=VARCHAR},
+      before_article = #{record.beforeArticle,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      remark1 = #{record.remark1,jdbcType=VARCHAR},
+      uploadDate = #{record.uploaddate,jdbcType=TIMESTAMP},
+      article_type = #{record.articleType,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hypq.springbootmybatis.domain.NewsDetail" >
+    update news_detail
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null" >
+        publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clickcount != null" >
+        clickCount = #{clickcount,jdbcType=INTEGER},
+      </if>
+      <if test="nextArticle != null" >
+        next_article = #{nextArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeArticle != null" >
+        before_article = #{beforeArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="uploaddate != null" >
+        uploadDate = #{uploaddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleType != null" >
+        article_type = #{articleType,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hypq.springbootmybatis.domain.NewsDetail" >
+    update news_detail
+    set title = #{title,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      clickCount = #{clickcount,jdbcType=INTEGER},
+      next_article = #{nextArticle,jdbcType=VARCHAR},
+      before_article = #{beforeArticle,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      uploadDate = #{uploaddate,jdbcType=TIMESTAMP},
+      article_type = #{articleType,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hypq.springbootmybatis.domain.NewsDetail" >
+    update news_detail
+    set title = #{title,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      clickCount = #{clickcount,jdbcType=INTEGER},
+      next_article = #{nextArticle,jdbcType=VARCHAR},
+      before_article = #{beforeArticle,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      uploadDate = #{uploaddate,jdbcType=TIMESTAMP},
+      article_type = #{articleType,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getNewsCount" parameterType="String" >
+    select count(*) from news_detail where article_type=#{type}
+  </select>
+
+  <select id="getByType" parameterType="String" resultMap="BaseResultMap">
+    select * from news_detail where article_type=#{type}
+  </select>
+  <select id="getLatestNews" resultMap="BaseResultMap" >
+    select * from news_detail order by uploaddate desc limit 0,1
+  </select>
+  <select id="getAll" resultMap="BaseResultMap">
+    select * from news_detail
+  </select>
+
+</mapper>

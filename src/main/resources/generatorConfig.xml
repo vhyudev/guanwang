@@ -92,7 +92,7 @@
 
     <!-- 指定数据库表 -->
 
-    <table schema="" tableName="news_table"></table>
+    <table schema="" tableName="news_detail"></table>
 
 
 
