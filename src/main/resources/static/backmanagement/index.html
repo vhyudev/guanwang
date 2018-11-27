@@ -37,15 +37,15 @@
                 <a href="javascript:;">
                     <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
                          class="layui-nav-img">
-                    贤心
+                    <span id="name"></span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
-        </ul>
+            <li class="layui-nav-item"><a href="javascript:void(0)" onclick="logout()">退出</a></li>
+        </ul>logout()
     </div>
 
     <div class="layui-side layui-bg-black">
@@ -63,9 +63,9 @@
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed"><a href="#" name="SuccesscaseManager.html" id="yunshichang" onclick="tabadd(this)">案例管理</a></li>
-                <li class="layui-nav-item"><a href="#">发布商品</a></li>
-                <li class="layui-nav-item layui-nav-itemed"><a href="#" name="NewsManager.html" id="newsMan" onclick="tabadd(this)">新闻管理</a></li>
+                <li class="layui-nav-item layui-nav-itemed"><a href="JavaScript:void(0)" name="SuccesscaseManager.html" id="yunshichang" onclick="tabadd(this)">案例管理</a></li>
+                <li class="layui-nav-item"><a href="JavaScript:void(0)">发布商品</a></li>
+                <li class="layui-nav-item layui-nav-itemed"><a href="JavaScript:void(0)" name="NewsManager.html" id="newsMan" onclick="tabadd(this)">新闻管理</a></li>
             </ul>
         </div>
     </div>
@@ -96,7 +96,7 @@
         © http://www.hypqjk.com - 华瑶普洽谈(天津)健康科技有限公司
     </div>
 </div>
-
+<script src="/js/jquery.min.js"></script>
 <script src="/layui/layui.all.js" charset="utf-8"></script>
 <script>
     //JavaScript代码区域
@@ -140,6 +140,24 @@
     function setIframeHeight(iframe) {
         iframe.height = document.documentElement.scrollHeight || document.body.scrollHeight;
     };
+    function logout() {
+        var date = new Date();
+        date.setTime(date.getTime() - 10000);
+        document.cookie = "JSESSIONID" + "=v; expire=" + date.toGMTString()
+            + "; path=/";
+
+        $.post("/logOut",{},function (data) {
+            if(data=="ok"){
+                location.href="login.html"
+            }
+        })
+    }
+    $(function(){
+        $.post("/getUserInfo",{},function (data) {
+          $("#name").html(data.username)
+            window.reload();
+        })
+    })
 </script>
 </body>
 </html>

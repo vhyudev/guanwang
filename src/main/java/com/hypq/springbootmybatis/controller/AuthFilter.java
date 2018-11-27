@@ -1,6 +1,7 @@
 package com.hypq.springbootmybatis.controller;
 
 
+import com.hypq.springbootmybatis.domain.UserTable;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -24,6 +25,7 @@ public class AuthFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         System.out.println("进入拦截器");
         String uri = request.getRequestURI();
+        System.out.println(uri);
         if(uri.contains("login")) {
             filterChain.doFilter(request,response);
         }else {
@@ -32,6 +34,7 @@ public class AuthFilter implements Filter {
             Object userinfo = session.getAttribute("userinfo");
 
             if(userinfo!=null){
+                System.out.println((UserTable)userinfo);
                 filterChain.doFilter(request,response);
 
             }else {

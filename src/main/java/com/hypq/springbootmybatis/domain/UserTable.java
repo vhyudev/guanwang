@@ -27,6 +27,15 @@ public class UserTable {
         return password;
     }
 
+    @Override
+    public String toString() {
+        return "UserTable{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
     }
