@@ -149,7 +149,7 @@
         $.post("/logOut",{},function (data) {
             if(data=="ok"){
                 var date = new Date();
-                location.href="http://localhost:8080/backmanagement/login.html?name="+date;
+                location.href="http://localhost:8080/backmanagement/index.html?name="+date;
             }
         })
     }
