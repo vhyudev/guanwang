@@ -148,15 +148,18 @@
 
         $.post("/logOut",{},function (data) {
             if(data=="ok"){
-                location.href="login.html"
+                var date = new Date();
+                location.href="http://localhost:8080/backmanagement/login.html?name="+date;
             }
         })
     }
     $(function(){
+
         $.post("/getUserInfo",{},function (data) {
           $("#name").html(data.username)
-            window.reload();
+
         })
+
     })
 </script>
 </body>
