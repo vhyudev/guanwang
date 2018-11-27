@@ -14,15 +14,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 @SpringBootApplication
 @MapperScan("com.hypq.springbootmybatis.dao")
 public class SpringbootMybatisApplication {
-    @Bean
-    public HttpMessageConverters fastJsonHttpMessageConverters() {
-        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-        fastConverter.setFastJsonConfig(fastJsonConfig);
-        HttpMessageConverter<?> converter = fastConverter;
-        return new HttpMessageConverters(converter);
-    }
+
 
 
     public static void main(String[] args) {

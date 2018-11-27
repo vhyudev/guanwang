@@ -1,5 +1,6 @@
 function getdata(pnum, psize,type,contentUrl,pageUrl) {
     $("#success").html("")
+
     $.post(contentUrl, {"pnum": pnum, "psize": psize,"type":type},
         function (data) {
             for (var i = 0; i < data.length; i++) {
@@ -11,6 +12,7 @@ function getdata(pnum, psize,type,contentUrl,pageUrl) {
                     '------------------------------------------------------------------------------------------------</div>\n')
             }
         }, "json");
+
     $.post(pageUrl, {"psize": psize,'type':type}, function (data) {
         //显示分页条
         $("#page").html("")
@@ -38,3 +40,52 @@ function getdata(pnum, psize,type,contentUrl,pageUrl) {
     }, "json")
 
 }
+
+function getLeftNews(){
+    $.post("/leftNewsquery",{type:"1"},function(data){
+        $("#leftNews").html('');
+        if(data.responseCode == '1'){
+            $("#leftNews").html("查询出错了");
+            return;
+        }
+        for (var i = 0; i < data.data.length; i++) {
+            $("#leftNews").append("<dd><a href='"+data.data[i].url+"' target='_blank' title='"+data.data[i].title+"'>"+data.data[i].title+"</a></dd>");
+        }
+
+    },"json");
+}
+
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  decodeURI(r[2]); return null;
+}
+function getArticle(){
+    var id = getQueryString("id");
+    $.post("/getArticle",{id:id},function(data){
+      if(data.responseCode=="0"){//成功
+        $("#newsTitle").html();//标题
+        $("#newsTitle").html("<h3>"+data.data.nd.title+"</h3>")
+        $("#secondTitle").html();//第二行
+        $("#secondTitle").html(data.data.nd.publishDate+"&nbsp  &nbsp&nbsp&nbsp&nbsp 点击："+data.data.nd.clickcount);
+        $("#mainArea").html();
+        $("#mainArea").html(data.data.nd.content);
+        $("#beforArticle").html();
+        if(data.data.beforeId==null || data.data.beforeId==""){
+            $("#beforArticle").html("上一篇：没有啦");
+        }else{
+            $("#beforArticle").html("上一篇：<a href='"+data.data.beforeUrl+"' target='_blank' title='"+data.data.beforeTitle+"'>"+data.data.beforeTitle+"</a> <span class='ListDate'>"+data.data.beforePublishDate+"</span>");
+        }
+        if(data.data.nextId==null || data.data.nextId==""){
+            $("#nextArticle").html("下一篇：没有啦");
+        }else{
+            $("#nextArticle").html("下一篇：<a href='"+data.data.nextUrl+"' target='_blank' title='"+data.data.nextTitle+"'>"+data.data.nextTitle+"</a> <span class='ListDate'>"+data.data.nextPublishDate+"</span>");
+        }
+
+      }
+
+    },"json");
+}
+
+
+

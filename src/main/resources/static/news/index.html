@@ -17,7 +17,12 @@ window.onerror=function(){return true;}
 </script>
 <script type="text/javascript">
     $(function () {
-        getdata(1, 5,"","/getnews","/getnewsCount")//获取第一页数据
+
+        getdata(1, 15,"","/getnews","/getnewsCount");//获取第一页数据
+        getLeftNews()
+
+
+
     })
 </script>
 </head>
@@ -80,7 +85,7 @@ window.onerror=function(){return true;}
 <div class="Sbox">
 <div class="topic">最新资讯   New</div>
 <div class="list">
-<dl><dd><a href='/html/1234685544.html' target='_blank' title='华瑶乐园快乐六一掠影'>华瑶乐园快乐六一掠影</a></dd><dd><a href='/html/2896102041.html' target='_blank' title='2018华瑶春节放假安排'>2018华瑶春节放假安排</a></dd><dd><a href='/html/1648904713.html' target='_blank' title='天津南方传媒珠江艾茉森数码钢琴公益行---走进华瑶自闭症儿童康复中心'>天津南方传媒珠江艾茉森数码钢</a></dd><dd><a href='/html/3591764842.html' target='_blank' title='放假通知（2017年7月22日-30日）'>放假通知（2017年7月22</a></dd><dd><a href='/html/4086732833.html' target='_blank' title='陈美城老师、张毅老师参加《发展性疗育课程》培训'>陈美城老师、张毅老师参加《发</a></dd><dd><a href='/html/1673024836.html' target='_blank' title='谭芳老师参加奥尔夫音乐培训'>谭芳老师参加奥尔夫音乐培训</a></dd><dd><a href='/html/5921035742.html' target='_blank' title='自闭症儿童训练计划（干货）'>自闭症儿童训练计划（干货）</a></dd><dd><a href='/html/0279165021.html' target='_blank' title='华瑶2017年春节放假时间安排'>华瑶2017年春节放假时间安</a></dd></dl>
+<dl id="leftNews"></dl>
 </div>
 
 </div>

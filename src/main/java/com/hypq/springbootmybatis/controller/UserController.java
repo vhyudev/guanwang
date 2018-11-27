@@ -1,6 +1,6 @@
 package com.hypq.springbootmybatis.controller;
 
-import com.hypq.springbootmybatis.dao.NewsTableMapper;
+
 import com.hypq.springbootmybatis.domain.UserTable;
 
 import com.hypq.springbootmybatis.service.UserService;
