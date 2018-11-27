@@ -1,12 +1,11 @@
 package com.hypq.springbootmybatis.service.impl;
 
-import com.hypq.springbootmybatis.dao.UserMapper;
-import com.hypq.springbootmybatis.domain.User;
-import com.hypq.springbootmybatis.domain.UserExample;
+
+import com.hypq.springbootmybatis.dao.UserTableMapper;
+import com.hypq.springbootmybatis.domain.UserTable;
+import com.hypq.springbootmybatis.domain.UserTableExample;
 import com.hypq.springbootmybatis.service.UserService;
-import com.sun.org.apache.xpath.internal.operations.String;
 import org.springframework.stereotype.Service;
-import com.hypq.springbootmybatis.domain.UserExample.Criteria;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -18,17 +17,18 @@ import java.util.Random;
 @Transactional
 public class UserServiceImpl implements UserService {
     @Resource
-    UserMapper mapper;
+    UserTableMapper mapper;
+
 
     @Override
-    public User getUser() {
-        return mapper.selectByPrimaryKey("1");
-    }
-
-    @Override
-    public List<User> getAll() {
-        UserExample example = new UserExample();
-        return mapper.selectByExample(example);
-
+    public UserTable getByUsername(String username) {
+        UserTableExample e = new UserTableExample();
+        UserTableExample.Criteria criteria = e.createCriteria();
+        criteria.andUsernameEqualTo(username);
+        List<UserTable> userTables = mapper.selectByExample(e);
+        if (userTables.size()==0){
+            return null;
+        }
+        return userTables.get(0);
     }
 }

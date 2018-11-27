@@ -87,7 +87,7 @@ public class SuccessController {
         if (StringUtils.isEmpty(limit)) {
             limit = "10";
         }
-        PageHelper.startPage(Integer.valueOf(page), Integer.valueOf(limit));
+        PageHelper.startPage(Integer.parseInt(page), Integer.parseInt(limit));
         List<SuccessTable> list = service.getSuccessItems();
         int count = service.getCount();
         Map<String, Object> map = new HashMap<String, Object>();

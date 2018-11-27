@@ -35,7 +35,7 @@ public class LunboController {
         if (StringUtils.isEmpty(limit)) {
             limit = "10";
         }
-        PageHelper.startPage(Integer.valueOf(page), Integer.valueOf(limit));
+        PageHelper.startPage(Integer.parseInt(page), Integer.parseInt(limit));
         List<LunbotuTable> list = service.getItems();
         int count = service.getCount();
         Map<String, Object> map = new HashMap<String, Object>();
@@ -49,9 +49,9 @@ public class LunboController {
     @RequestMapping("/upload")
     @ResponseBody
     public Map<String, String> fileUpload_2(MultipartFile file, HttpServletRequest request) throws IOException {
-        Picupload.upload(file, request, "D:\\guanwang\\guanwang\\src\\main\\resources\\static\\images\\Up_Images\\");
+        Picupload.upload(file, request, "D:\\pic\\");
         Map<String, String> map = new HashMap<>();
-        map.put("src", "url(images/Up_Images/" + file.getOriginalFilename() + ")");
+        map.put("src", "url(pic/" + file.getOriginalFilename() + ")");
         map.put("status", "ok");
         return map;
     }

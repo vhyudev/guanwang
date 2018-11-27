@@ -1,98 +1,76 @@
 package com.hypq.springbootmybatis.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.PageHelper;
-import com.hypq.springbootmybatis.dao.NewsDetailMapper;
-import com.hypq.springbootmybatis.domain.NewsDetail;
-import com.hypq.springbootmybatis.domain.NewsDetailExample;
-import com.hypq.springbootmybatis.domain.User;
+
+import com.hypq.springbootmybatis.domain.UserTable;
+
 import com.hypq.springbootmybatis.service.UserService;
-import com.hypq.springbootmybatis.utils.CreateHtmlUtils;
 import com.hypq.springbootmybatis.utils.RedisUtils;
+import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
 public class UserController {
-
-    @Resource
-    private UserService userService;
     @Autowired
-    RedisUtils ru;
-    @Resource
-    NewsDetailMapper mapper;
+    UserService service;
 
+    @RequestMapping("/login")
+   public void userLogin(UserTable userTable , HttpServletRequest request, HttpServletResponse response) {
 
-    @RequestMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void getUser(String callback, HttpServletResponse response) {
-        PageHelper.startPage(0, 1);
-        List<User> list = userService.getAll();
-        String s = JSON.toJSONString(list);
-        try {
-            // response.getWriter().write(callback + "(" + s + ")");
-            response.getWriter().write(s);
-        } catch (IOException e) {
-            e.printStackTrace();
+        UserTable user = service.getByUsername(userTable.getUsername());
+        if (user == null) {
+            try {
+                response.getWriter().write("faile");
+
+            } catch (Exception e) {
+
+            }
+        } else {
+            if (user.getPassword().equals(userTable.getPassword())) {
+                //登录成功
+
+                HttpSession session=request.getSession();
+                String sessionid=session.getId();
+                Cookie cookie=new Cookie("JSESSIONID",sessionid);
+                cookie.setMaxAge(30*60);
+                response.addCookie(cookie);
+                session.setMaxInactiveInterval(30*60);
+                session.setAttribute("userinfo", user);
+
+            } else {
+
+                try {
+                    response.getWriter().write("faile");
+
+                } catch (Exception e) {
+
+                }
+            }
         }
 
     }
-
-    @RequestMapping(value = "/test33", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<User> getUser2(String callback, HttpServletResponse response) {
-        // PageHelper.startPage(0, 1);
-        List<User> list = userService.getAll();
-        System.out.println("hehe");
-        return list;
-
-    }
-
-    @RequestMapping(value = "/test4")
-    public String a(String callback, HttpServletResponse response) {
-
-        return "/index.html";
-
-    }
-
-
-    @RequestMapping("/test2")
+    @RequestMapping("/getUserInfo")
     @ResponseBody
-    public List<NewsDetail>  test(int pagenum,int pagesize) {
-        System.out.println(pagenum);
-        System.out.println(pagesize);
-        PageHelper.startPage(pagenum,pagesize);//pagenum 0 和 1 代表的都是的第一页
-        NewsDetailExample example = new NewsDetailExample();
-        List<NewsDetail> newsTables = mapper.selectByExample(example);
-        return newsTables;
+    public UserTable getUserInfo(HttpServletRequest request){
+        UserTable user = (UserTable)request.getSession().getAttribute("userinfo");
+        return user;
+
     }
 
-    @RequestMapping("/freemarker")
-    public String freemarker(Map<String, Object> map, HttpServletRequest request) {
-        map.put("name", "Joe");
-        map.put("sex", 1);    //sex:性别，1：男；0：女；
+    @RequestMapping("/logOut")
+    @ResponseBody
+    public String logOut(HttpServletRequest request){
+       request.getSession().invalidate();
+        return "ok";
 
-        // 模拟数据
-        List<Map<String, Object>> friends = new ArrayList<Map<String, Object>>();
-        Map<String, Object> friend = new HashMap<String, Object>();
-        friend.put("name", "333");
-        friend.put("age", 22);
-        friends.add(friend);
-        friend = new HashMap<String, Object>();
-        friend.put("name", "July");
-        friend.put("age", 22);
-        friends.add(friend);
-        map.put("friends", friends);
-        CreateHtmlUtils.createHtmlFromModel(map, request);
-        return "freemarker";
     }
-
 }
