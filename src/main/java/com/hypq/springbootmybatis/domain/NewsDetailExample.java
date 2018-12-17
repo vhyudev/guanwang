@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class NewsDetailExample {
+public class   NewsDetailExample {
     protected String orderByClause;
 
     protected boolean distinct;

@@ -249,13 +249,15 @@
 
             var up=data.upitem;
             var down=data.downitem;
-            if(typeof(up)=="undefined"){
+            console.log(up)
+            console.log(down)
+            if(typeof(up)=="undefined"||up==null){
                 $("#up").append("没有了!");
             }else {
                 $("#up").append("<a href=success0001.html?id="+up.id+">"+up.title+"</a>");
             }
 
-            if(typeof(down)=="undefined"){
+            if(typeof(down)=="undefined"||down==null){
                 $("#down").append("没有了!");
             }else{
                 $("#down").append("<a href=success0001.html?id="+down.id+">"+down.title+"</a>")
