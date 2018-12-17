@@ -75,7 +75,7 @@
     //第一个实例
     table.render({
         elem: '#demo'
-        , url: '/getSuccessItems' //数据接口
+        , url: '/getZiyuanItems' //数据接口
         , cols: [[ //表头
             , {field: 'id', title: 'ID', width: 45}
             , {field: 'title', title: '标题名称', width: 100}
@@ -101,7 +101,7 @@
 
         } else if (obj.event === 'del') {
             layer.confirm('确定删除此条数据?', function (index) {
-                $.post("/deleteSuccessCase", {"id": data.id}, function (data) {
+                $.post("/deleteZiyuanCase", {"id": data.id}, function (data) {
                     if (data.msg == "ok") {
                         layer.msg("操作成功")
 
@@ -126,7 +126,7 @@
     function tijiao() {
         editor.sync();
         var param = $("#tanchuceng").serialize();
-        $.post("/addSuccesscase", param, function (data) {
+        $.post("/addZiyuancase", param, function (data) {
             if (data.msg == "ok") {
 
             }

@@ -4,14 +4,14 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=7">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>资源中心_天津市河北区华瑶自闭症儿童康复中心</title>
+    <title>成功案例_天津市河北区华瑶自闭症儿童康复中心</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
-    <link href="../css/HituxCMSBold/inner.css" rel="stylesheet" type="text/css"/>
-    <link href="../css/HituxCMSBold/common.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="../js/functions.js"></script>
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../images/iepng/iepngfix_tilebg.js"></script>
+    <link href="/css/HituxCMSBold/inner.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/HituxCMSBold/common.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/js/functions.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/images/iepng/iepngfix_tilebg.js"></script>
     <script type="text/javascript">
         window.onerror = function () {
             return true;
@@ -33,7 +33,7 @@
     <div class="top">
 
         <div class="TopLogo">
-            <div class="logo"><a href="/index.html"><img src="../images/Up_Images/201489191714.png"
+            <div class="logo"><a href="/index.html"><img src="/images/Up_Images/201489191714.png"
                                                          alt="天津市河北区华瑶自闭症儿童康复中心"></a></div>
 
             <div class="tel">
@@ -94,7 +94,7 @@
             <!--left start-->
             <div class="left">
                 <div class="Sbox">
-                    <div class="topic">资源中心   Success</div>
+                    <div class="topic">资源中心   Resource</div>
                     <div class="blank">
                         <ul>
                             <li><A href='/About/Culture/index.html'>华瑶文化</A></li>
@@ -155,6 +155,12 @@
                         </div>
                         <div id="page"></div>
                     </div>
+                    <br/>
+                    <div>
+                        上一条:&nbsp&nbsp<span id="up"></span>
+                        <br/><br/>
+                        下一条:&nbsp&nbsp<span id="down"></span>
+                    </div>
                     <!--content end-->
 
                 </div>
@@ -197,9 +203,9 @@
                         }()
                         /* ]]> */</script>
                 </p>
-                <a href="/rss" target="_blank"><img src="../images/rss_icon.gif"></a> <a href="/rss/feed.xml"
+                <a href="/rss" target="_blank"><img src="/images/rss_icon.gif"></a> <a href="/rss/feed.xml"
                                                                                          target="_blank"><img
-                    src="../images/xml_icon.gif"></a></p>
+                    src="/images/xml_icon.gif"></a></p>
             </div>
             <div class='InnerRight'>
                 <div class='tel'>022 8678 8187</div>
@@ -225,56 +231,47 @@
 </div>
 <script type="text/javascript" src="../js/ServiceCenter.js"></script>
 <script type="text/javascript">
+    var id;
     $(function () {
-        getdata(1, 5)//获取第一页数据
+        var reg = new RegExp("(^|&)id=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null){
+            id= unescape(r[2]);
+        }else{
+            id=null
+        }
+
+        $.post("/getZiyuanById",{"id":id},function (data) {
+            $("#success").html("")
+            $("#success").append(data.remark)
+        })
+        $.post("/ZUpandDown",{"id":id},function (data) {
+
+            var up=data.upitem;
+            var down=data.downitem;
+            console.log(up)
+            console.log(down)
+            if(typeof(up)=="undefined"||up==null){
+                $("#up").append("没有了!");
+            }else {
+                $("#up").append("<a href=success0002.html?id="+up.id+">"+up.title+"</a>");
+            }
+
+            if(typeof(down)=="undefined"||down==null){
+                $("#down").append("没有了!");
+            }else{
+                $("#down").append("<a href=success0002.html?id="+down.id+">"+down.title+"</a>")
+            }
+
+        })
     })
 
-    function getdata(pnum, psize) {
-        $("#success").html("")
-        $.post("/getZiyuan", {"pnum": pnum, "psize": psize},
-            function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    $("#success").append('<div style="display: flex;justify-content:space-between">\n' +
-                        '\t\t<div><a style="font-size: small" href=/Support/Supportcase/success0002.html?id='+data[i].id+'>' + data[i].title + '</a></div>\n' +
-                        '\t\t<div style="font-size: small">' + data[i].date + '</div>\n' +
-                        '\t</div>\n' +
-                        '\t<div style="color: #9a9a9a;margin-top: -2px">----------------------------------------------------------' +
-                        '------------------------------------------------------------------------------------------------</div>\n')
-                }
-            }, "json");
-        $.post("/getziyuanpagecount", {"psize": psize}, function (data) {
-            //显示分页条
-            $("#page").html("")
-            $("#page").append('<div class=\'t_page ColorLink\'>总数：' + data.count + '条&nbsp;&nbsp;当前页数：' +
-                '<span class=\'FontRed\'>' + pnum + '</span>/' + data.pagecount + '' +
-                '<a href="#" onclick="getdata(1,' + psize + ')">首页</a>' +
-                '<span id="shangyiye"><a href=# onclick="getdata(' + (pnum - 1) + ',' + psize + ')">上一页</a></span>' +
-                '<span id="pagenum"></span> ' +
-                '<span id="xiayiye"><a href=# onclick="getdata(' + (pnum + 1) + ',' + psize + ')">下一页</a></span>' +
-                '<a href="#" onclick="getdata(' + data.pagecount + ',' + psize + ')">尾页</a></div>\n')
-            //遍历页码
-            $("#pagenum").html("");
-            for (var i = 0; i < data.pagecount; i++) {
-                $("#pagenum").append("<a href='#' onclick='getdata(" + (i + 1) + "," + psize + ")'>" + (i + 1) + "</a>")
-            }
-            //上一下，下一页调整
-            if (pnum == 1) {
-                $("#shangyiye").html("");
-                $("#shangyiye").append("上一页")
-            }
-            if (pnum == data.pagecount) {
-                $("#xiayiye").html("");
-                $("#xiayiye").append("下一页")
-            }
-        }, "json")
-
-    }
 </script>
 
 </body>
 </html>
 <!--
-Powered By HituxCMS ASP V2.1 
+Powered By HituxCMS ASP V2.1
 -->
 
 
