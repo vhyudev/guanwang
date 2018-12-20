@@ -12,6 +12,12 @@
     <meta name="format-detection" content="telephone=no">
 
     <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <style>
+        p{
+            margin-left: 4px;
+        }
+
+    </style>
 </head>
 <body class="layui-layout-body">
 
@@ -40,15 +46,15 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item"><a href="JavaScript:void(0)" id="liuyanguanli" name="Liuyan.html" onclick="tabadd(this)">留言管理</a></li>
-                <li class="layui-nav-item layui-nav-itemed">
+                <li class="layui-nav-item">
                     <a class="" href="javascript:;" id="lunbotuguangli" name="LunbotuManger.html" onclick="tabadd(this)">轮播图管理</a>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;" id="ziyuanguangli" name="ZiyuanManage.html" onclick="tabadd(this)">资源管理</a>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed"><a href="JavaScript:void(0)" name="SuccesscaseManager.html" id="yunshichang" onclick="tabadd(this)">案例管理</a></li>
+                <li class="layui-nav-item"><a href="JavaScript:void(0)" name="SuccesscaseManager.html" id="yunshichang" onclick="tabadd(this)">案例管理</a></li>
 
-                <li class="layui-nav-item layui-nav-itemed"><a href="JavaScript:void(0)" name="NewsManager.html" id="newsMan" onclick="tabadd(this)">新闻管理</a></li>
+                <li class="layui-nav-item"><a href="JavaScript:void(0)" name="NewsManager.html" id="newsMan" onclick="tabadd(this)">新闻管理</a></li>
             </ul>
         </div>
     </div>
@@ -61,7 +67,10 @@
                     <li class="layui-this" lay-id="11">首页</li>
                 </ul>
                 <div class="layui-tab-content">
-                    <div class="layui-tab-item layui-show">欢迎来到,华瑶后台管理系统!</div>
+                    <div class="layui-tab-item layui-show" style="border-left: 4px solid green;background-color:#f2f2f2;padding: 4px">
+                        <p style="color: orange">管理员,你好!</p>
+                        <p>欢迎来到,华瑶后台管理系统!</p>
+                    </div>
 
                 </div>
             </div>

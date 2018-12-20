@@ -303,8 +303,8 @@ text-align:left;}
 	background:url("../../images/HituxCMSBold/item_bg.jpg") no-repeat center bottom;
 
 }
-#body .blk_29 .box IMG {	BORDER: #F5F5F5 1px solid; PADDING: 1px; DISPLAY: block; BACKGROUND: #fff; PADDING-BOTTOM: 3px; MARGIN: 0px auto; width:80px;height:80px;}
-#body .blk_29 .box A:hover IMG {	BORDER: #333 1px solid;text-decoration:none;}
+#body .blk_29 .box IMG {	BORDER: #F5F5F5 1px solid; PADDING: 1px; DISPLAY: block; BACKGROUND: #fff; PADDING-BOTTOM: 1px; MARGIN: 0px auto; width:80px;height:80px;}
+#body .blk_29 .box A:hover IMG {	BORDER: #6585AA 2px solid;text-decoration:none;}
 
 #body .blk_29 .box  .BoxLeft{
 	width:115px;

@@ -5,7 +5,7 @@ body,td,th {
 	font-size: 14px;
 }
 
-img, div { behavior: url(../../images/iepng/iepngfix.htc); }
+img, div {  }
 
 body, div, p,img,dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, blockquote {
 	padding:0px;
@@ -245,7 +245,7 @@ input,textarea{
 	bottom:0px;
 	left:0;
 	color:#0170d9;
-	font-weight:;
+
 	text-align:center;
 	cursor:pointer;
 	margin:auto;
@@ -290,6 +290,7 @@ input,textarea{
 #footer .inner .InnerRight{
 	float:right;
 	width:420px;
+	margin-top: 30px;
 }
 
 #footer .inner .InnerRight .tel{
@@ -312,7 +313,7 @@ input,textarea{
 	height:30px;
 	line-height:30px;
 	color:#FFF;
-	background:#FFF url("../../images/HituxCMSBold/nav_bg2.png") repeat-x center -5px;
+	background:#FFF  repeat-x center -5px;
 }
 
 #footer .inner .BottomNav a{
@@ -476,7 +477,7 @@ input,textarea{
 	padding-top: 20px;
 	padding-bottom: 20px;
 	overflow: hidden;
-	color#FFF;
+	color:#FFF;
 }
 #light_footer_wrapper {
 	font-size:12px;
